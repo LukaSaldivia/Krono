@@ -1,7 +1,9 @@
 class Krono{
-    constructor(){
+    constructor(div=1){
         this.startTime = 0;
         this.isRunning = false;
+        // 
+        this.div = div;
         // 
         this.startPause = 0;
         this.pauseTime = 0;
@@ -26,10 +28,10 @@ class Krono{
     }
 
     getTime(){
-        let elapsedTime = this.startPause - this.startTime - this.pauseTime;
+        let elapsedTime = Math.floor((this.startPause - this.startTime - this.pauseTime)/this.div);
 
         if(this.isRunning){
-            elapsedTime = Date.now()-this.startTime-this.pauseTime; 
+            elapsedTime = Math.floor((Date.now()-this.startTime-this.pauseTime)/this.div); 
         }
         return elapsedTime;
     }
@@ -66,19 +68,27 @@ class Krono{
 
 
 let reloj = new Krono;
+let reloj2 = new Krono(1000)
+reloj2.start();
+
 
 
 
 
 
 function showTime(){
-    document.querySelector('#timer').innerText = `${reloj.getTime()} ms`;
+    document.querySelector('#timer').innerText = reloj.getTime();
 }
 
 
 window.setInterval( function(){
     showTime();
-  },1000/60);
+    console.log(reloj2.getTime())
+
+    // if(reloj.getTime()>5000){
+    //     reloj.toZero();
+    // }
+  },0);
 
 
 document.addEventListener('keypress',(e)=>{
@@ -87,12 +97,16 @@ document.addEventListener('keypress',(e)=>{
         case 'KeyS':
             reloj.start()
             break;
-    
-        case 'KeyR':
-            reloj.reset()
-            break;
-        case 'KeyP':
-            reloj.isPaused? reloj.continue() : reloj.pause()
+            
+            case 'KeyR':
+                reloj.reset()
+                break;
+                case 'KeyP':
+                    if(reloj.isPaused){
+                        reloj.continue()
+                    }else{
+                        reloj.pause()
+            }
             break;
         case 'KeyZ':
             reloj.toZero()

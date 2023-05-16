@@ -20,11 +20,14 @@ body{
     color: white;
     font-weight: bolder;
     font-size: 2rem;
-    border-radius: 1rem;
-    width: 20rem;
-    max-width: 20rem;
+    border-radius: 100%;
+    width: 12rem;
+    max-width: 12rem;
+    aspect-ratio: 1/1;
     display: grid;
-    justify-content: center;
+    place-content: center;
+    box-shadow: 1rem 1rem 1rem .2rem #376b5a88,
+                -1rem -1rem 1rem .2rem #00000020 inset;
 }
 
 ul{
@@ -46,8 +49,8 @@ li{
 
 code{
     color: #376b5a;
-    font-weight: 900;
     font-family: monospace;
+    font-weight: 900;
 }
 
 div.title{
