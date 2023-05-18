@@ -26,8 +26,9 @@ body{
     aspect-ratio: 1/1;
     display: grid;
     place-content: center;
-    box-shadow: 1rem 1rem 1rem .2rem #376b5a88,
-                -1rem -1rem 1rem .2rem #00000020 inset;
+    box-shadow: 1rem 1rem 1rem .2rem #00000044,
+                -1rem -1rem 1rem .2rem #00000020 inset,
+                .4rem .4rem 1rem .6rem #ffffff20 inset                ;
 }
 
 ul{

@@ -1,79 +1,30 @@
-class Krono{
-    constructor(div=1){
-        this.startTime = 0;
-        this.isRunning = false;
-        // 
-        this.div = div;
-        // 
-        this.startPause = 0;
-        this.pauseTime = 0;
-        this.isPaused = false;
-    }
-    
-    start(){
-        if(!this.isRunning && !this.isPaused){
-        this.startTime = Date.now()
-        this.isRunning = true;
-        }
-    }
 
-    
-    reset(){
-        this.startTime = 0;
-        this.isRunning = false;
-        // 
-        this.startPause = 0;
-        this.pauseTime = 0;
-        this.isPaused = false;
-    }
 
-    getTime(){
-        let elapsedTime = Math.floor((this.startPause - this.startTime - this.pauseTime)/this.div);
+let reloj = new Krono({
+    output:1000,
+    isBackwards:true,
+    end:true,
+    initial:4,
+    whenDone: ()=>{funcionX()}
+});
+let reloj2 = new Krono({
+    output:1
+})
 
-        if(this.isRunning){
-            elapsedTime = Math.floor((Date.now()-this.startTime-this.pauseTime)/this.div); 
-        }
-        return elapsedTime;
-    }
+let example = new Krono({
+    output: 1,
+    isBackwards: false,
+    end:true,
+    initial:7,
+    whenDone: ()=>{console.error('Terminaron los 7 segundos')}
+})
 
-    
-    pause(){
-        if(this.isRunning){
-        this.startPause = Date.now()
-        this.isRunning = false;
-        this.isPaused = true;
-        }
-    }
-    
-    continue(){
-        if(!this.isRunning){
-        this.pauseTime += Date.now()-this.startPause;
-        this.isRunning = true;
-        this.isPaused = false;
-        }
-    }
 
-    toZero(){
-        this.startTime = 0;
-        this.isRunning = false;
-        
-        this.startPause = 0;
-        this.pauseTime = 0;
-        
-        if(!this.isPaused){
-            this.start();
-        }
-    }
+example.start();
+
+function funcionX() {
+    console.warn('Hola')
 }
-
-
-let reloj = new Krono;
-let reloj2 = new Krono(1000)
-reloj2.start();
-
-
-
-
 
 
 function showTime(){
@@ -83,12 +34,12 @@ function showTime(){
 
 window.setInterval( function(){
     showTime();
-    console.log(reloj2.getTime())
+    console.log(example.getTime())
 
     // if(reloj.getTime()>5000){
     //     reloj.toZero();
     // }
-  },0);
+  },10);
 
 
 document.addEventListener('keypress',(e)=>{
@@ -109,7 +60,7 @@ document.addEventListener('keypress',(e)=>{
             }
             break;
         case 'KeyZ':
-            reloj.toZero()
+            reloj.toInitial()
             break;
 
     
